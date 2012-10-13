@@ -9,9 +9,11 @@ package
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import objects.Level;
 	
 	public class Game extends Sprite
 	{
+		private var level:Level;
 		private var player:Player;
 		
 		public function Game()
@@ -34,6 +36,9 @@ package
 		
 		private function drawGame():void
 		{
+			level = new Level();
+			this.addChild(level);
+			
 			player = new Player();
 			// Draw the player at the middle of the screen
 			player.x = stage.stageWidth/2;
@@ -46,7 +51,7 @@ package
 			var touch:Touch = e.getTouch(stage);
 			if(touch != null && touch.phase == TouchPhase.ENDED)
 			{
-				player.moveToPoint(touch.globalX, touch.globalY);
+				player.moveToPoint(level, touch.globalX, touch.globalY);
 			}
 		}
 
