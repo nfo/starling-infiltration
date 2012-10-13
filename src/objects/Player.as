@@ -2,7 +2,11 @@ package objects
 {
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.geom.Point;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -10,6 +14,8 @@ package objects
 	
 	public class Player extends starling.display.Sprite
 	{
+		private var velocity:Number = 96;
+		
 		public function Player()
 		{
 			super();
@@ -42,6 +48,17 @@ package objects
 			// playerArt.x = Math.ceil(-playerArt.width/2);
 			// playerArt.y = Math.ceil(-playerArt.height/2);
 			this.addChild(playerArt);
+		}
+		
+		public function moveToPoint(x:Number, y:Number):void
+		{
+			var distance:Number = Point.distance(new Point(x, y), new Point(this.x, this.y));
+			var duration:Number = distance / velocity;
+
+			// http://wiki.starling-framework.org/manual/animation#tween
+			var tween:Tween = new Tween(this, duration, Transitions.EASE_IN_OUT);
+			tween.moveTo(x, y);
+			Starling.juggler.add(tween);
 		}
 	}
 }
