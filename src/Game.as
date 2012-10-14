@@ -1,6 +1,8 @@
 package
 {
+	import objects.Level;
 	import objects.Player;
+	import objects.enemies.Runner;
 	
 	import starling.core.Starling;
 	import starling.display.Sprite;
@@ -9,12 +11,14 @@ package
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import objects.Level;
 	
 	public class Game extends Sprite
 	{
-		private var level:Level;
-		private var player:Player;
+		public var level:Level;
+		public var player:Player;
+		public var runner1:Runner;
+		public var runner2:Runner;
+		public var runner3:Runner;
 		
 		public function Game()
 		{
@@ -39,11 +43,23 @@ package
 			level = new Level();
 			this.addChild(level);
 			
-			player = new Player();
 			// Draw the player at the middle of the screen
+			player = new Player();
 			player.x = stage.stageWidth/2;
 			player.y = stage.stageHeight/2;
 			this.addChild(player);
+			
+			// Draw 3 runner enemies at the edge of the screen
+			runner1 = new Runner();
+			runner1.x = stage.stageWidth - 10;
+			this.addChild(runner1);
+			runner2 = new Runner();
+			runner2.y = stage.stageHeight - 10;
+			this.addChild(runner2);
+			runner3 = new Runner();
+			runner3.x = stage.stageWidth - 10;
+			runner3.y = stage.stageHeight - 10;
+			this.addChild(runner3);
 		}
 
 		private function onTouchEvent(e:TouchEvent):void

@@ -29,6 +29,7 @@ package objects
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			createLevelMap();
+			astar = new AStar(levelMap);
 			createLevelArt();
 		}
 		
@@ -98,13 +99,11 @@ package objects
 				y=0;
 				x+=1;
 			}
-			
-			astar = new AStar(levelMap);
 		}
 		
 		private function isOccupied():Boolean {
 			var ran : Number = Math.random();
-			return ran < 0.3; // 30% of probability to return true
+			return ran < 0.2; // 20% of probability to return true
 		}
 
 	}
